@@ -1,6 +1,13 @@
-require('dotenv').config()
+const commandLineArgs = require('command-line-args')
+const optionDefinitions = [
+    { name: 'env', alias: 'e' ,type: String}
+  ]
+const options = commandLineArgs(optionDefinitions)
+require('dotenv').config({ path: `.env.${options.env}` });
+  
 const config = require(process.env.configFile);
 const express = require('express');
+
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
@@ -8,6 +15,7 @@ const SynkronyPayLib = require("./lib/SynkronyPay.lib.js");
 
 
 const app = express();
+app.use(express.static('example'))
 const port = 3333;
 
 app.use(cors());
