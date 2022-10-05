@@ -1,0 +1,36 @@
+{
+  "name": "spg",
+  "version": "1.0.17",
+  "description": "tool for creating smart contracts for blockchains and other uses for the blockchain",
+  "main": "./src/index.js",
+  "scripts": {
+    "api:dev": "node ./src/api.js -e dev",
+    "api": "node ./src/api.js -e prod",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/affidaty-blockchain/synkrony-payments-gateway.git"
+  },
+  "keywords": [
+    "blockchain",
+    "trinci",
+    "smart",
+    "contract",
+    "payment"
+  ],
+  "author": "Affidaty S.p.a. - Trinci Blockchain",
+  "license": "AGPL",
+  "bugs": {
+    "url": "https://github.com/affidaty-blockchain/synkrony-payments-gateway.git/issues"
+  },
+  "homepage": "https://github.com/affidaty-blockchain/synkrony-payments-gateway.git#readme",
+  "dependencies": {
+    "@affidaty/t2-lib": "^2.0.35",
+    "command-line-args": "^5.2.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.1",
+    "node-fetch": "^3.2.10"
+  }
+}

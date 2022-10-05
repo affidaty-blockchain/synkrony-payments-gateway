@@ -1,0 +1,17 @@
+{
+  "account" : {
+    "accountId": "YOURACCOUNTID",
+    "publicKey": "YOURPUBLICKEY-BASE58",
+    "privateKey": "YOURPRIVATEKEY-BASE58"
+  },
+  "paymentConfig" : {
+    "licenseId" : "YOURLICENSE",
+    "webhook":"http://webhook",
+    "currency": "EUR",
+    "successUrl":"/pay-component/assets/test/thankyou.html",
+    "cancelUrl":"/" ,
+    "userPayFees":false, 
+    "timeToExpire":86400,
+    "appName" : "TestApp"
+  }
+}
