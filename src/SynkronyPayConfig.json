@@ -13,5 +13,7 @@
     "userPayFees":false, 
     "timeToExpire":86400,
     "appName" : "TestApp"
-  }
+  },
+  "synkronypayAuthorizedDomain": "YOURDOMAIN",
+  "synkronypayAPIKey": "YOURDOMAINAPIKEY"
 }
