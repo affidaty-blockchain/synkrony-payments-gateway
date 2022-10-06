@@ -26,10 +26,12 @@ app.use(bodyParser.json());
 
 app.post('/createIntent', (req, res) => {
     const args = req.body;
-    console.log(config)
     SynkronyPayLib.createIntent(args, config)
     .then(result => res.json({status:200,paymentObject:result}))
-    .catch(error => res.json({status:400,error}))
+    .catch(error => {
+        res.status(400)
+        res.json({status:400,error})
+    })
     
 });
 
@@ -37,8 +39,11 @@ app.post('/submitPayment', (req, res) => {
     const args = req.body;
     SynkronyPayLib.submitPaymentBulkTransaction(args, config)
     .then(result => res.json({status:200,paymentObject:result}))
-    .catch(error => res.json({status:400,error}))
-    
+    .catch(error => {
+        res.status(400)
+        return res.json({status:400,error})
+    })
 });
+
 
 app.listen(port, () => console.log(`SynkronyPay app listening on port ${port}!`));

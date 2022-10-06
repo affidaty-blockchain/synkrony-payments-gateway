@@ -31,6 +31,13 @@ This tool expose two different api endpoint:
 
 ```
 
+
+**Note:** for Bitcoin, you must use "Satoshi" value : <span style="color:green">**1**</span> BTX = <span style="color:green">**1**</span> x 10<sup>8</sup> Satoshi
+
+**Note:** for Euros, you must use "Cents" value : <span style="color:green">**1**</span> EURO = <span style="color:green">**1**</span> x 100 Cents
+
+**Note:** you can fill "payload" with an object that contains any information, payment system take care about send this object in each webhook, you can store cart datail, payment id, or all e-commerce stuff that you need to recovery the cart from webhook.
+
 take the result and use it as input parameter of PayComponent in browser
 
 ```javascript
@@ -51,13 +58,6 @@ take the result and use it as input parameter of PayComponent in browser
 
 ```
 
-**Note:** for Bitcoin, you must use "Satoshi" value : <span style="color:green">**1**</span> BTX = <span style="color:green">**1**</span> x 10<sup>8</sup> Satoshi
-
-**Note:** for Euros, you must use "Cents" value : <span style="color:green">**1**</span> EURO = <span style="color:green">**1**</span> x 100 Cents
-
-**Note:** It's possible to fill "payload" with an object that contains any information, the payment system sends this object in each webhook, cart datail, payment id, or all e-commerce stuff can be stored to recovery the cart from webhook.
-
-
 # Usage as batch command
 
 This tool can be used as cli command.
@@ -69,6 +69,15 @@ For each payment run in shell:
 ```shell
 node ./src/cli.js -c createIntent -e dev (or -e prod) -a '{"main": { "sign": "#BTC", "units": 1000000 },"other": [{ "sign": "#EURS", "units": 1000 }],"payload": {"yourItem" : "yourValue"}}'
 ```
+
+
+**Note:** for Bitcoin, you must use "Satoshi" value : <span style="color:green">**1**</span> BTX = <span style="color:green">**1**</span> x 10<sup>8</sup> Satoshi
+
+**Note:** for Euros, you must use "Cents" value : <span style="color:green">**1**</span> EURO = <span style="color:green">**1**</span> x 100 Cents
+
+**Note:** you can fill "payload" with an object that contains any information, payment system take care about send this object in each webhook, you can store cart datail, payment id, or all e-commerce stuff that you need to recovery the cart from webhook.
+
+
 take the result and use it as input parameter of PayComponent in browser
 
 ```javascript
@@ -82,11 +91,6 @@ node ./src/cli.js -c submitPayment -e dev (or -e prod) -a '{"paymentId": "dataRe
 ```
 
 
-**Note:** for Bitcoin, you must use "Satoshi" value : <span style="color:green">**1**</span> BTX = <span style="color:green">**1**</span> x 10<sup>8</sup> Satoshi
-
-**Note:** for Euros, you must use "Cents" value : <span style="color:green">**1**</span> EURO = <span style="color:green">**1**</span> x 100 Cents
-
-**Note:** you can fill "payload" with an object that contains any information, payment system take care about send this object in each webhook, you can store cart datail, payment id, or all e-commerce stuff that you need to recovery the cart from webhook.
 
 
 

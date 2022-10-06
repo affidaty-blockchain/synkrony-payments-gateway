@@ -1,5 +1,6 @@
+const { BulkNodeTransaction, BulkRootTransaction } = require("@affidaty/t2-lib");
 const t2lib = require("@affidaty/t2-lib");
-const fetch = import("node-fetch");
+const fetch = require("node-fetch");
 
 function makeid(length) {
     var result           = '';
@@ -43,15 +44,28 @@ function createIntent({main = {sign: "#BTC", "units": 0 },other= [], payload = {
   })
 }
 
-function submitPaymentBulkTransaction(bulkB58, config) {
-  let baseUrl = process.env.baseUrl
-  const bulk = new t2lib.BulkTransaction()
-  return bulk.fromBase58(bulkB58).then(() => {
-    return bulk.sign(config.account.privateKey).then(() => bulk.toBase58())
-  }).then(b58SignedTx => {
-    return fetch(`${baseUrl}/v1/component/pay/sendPaymentBulk`, { method: "POST", data: {bulk: b58SignedTx}}).then(res => res.json())
-  }).then(response => {
-    return response.json()
+async function submitPaymentBulkTransaction({bulkNode, bulkRoot}, config) {
+  return new Promise(async (resolve, reject) => {
+    let baseUrl = process.env.baseUrl
+    const node = new BulkNodeTransaction()
+    const root = new BulkRootTransaction()
+    const bulk = new t2lib.BulkTransaction()
+    const privateKey = new t2lib.ECDSAKey("private");
+    await node.fromBase58(bulkNode)
+    await root.fromBase58(bulkRoot)
+    bulk.data.root = root
+    bulk.data.nodes.push(node)
+    await privateKey.importBin(new Uint8Array(t2lib.binConversions.base58ToBuffer(config.account.privateKey)))
+    await bulk.sign(privateKey)
+    const b58SignedTx = await bulk.toBase58()
+    console.log(b58SignedTx)
+    fetch(`${baseUrl}/v1/component/pay/sendPaymentBulk`, { method: 'POST', body: JSON.stringify({bulk: b58SignedTx}),headers: { 
+      'Content-Type': 'application/json',
+      'synpayauth': `${config.synkronypayAuthorizedDomain};${config.synkronypayAPIKey}`
+    } })
+    .then(res => res.json())
+    .then(json => resolve(json))
+    .catch(reject)
   })
 }
 
