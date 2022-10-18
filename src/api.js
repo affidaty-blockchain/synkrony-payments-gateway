@@ -43,7 +43,13 @@ app.post('/submitPayment', (req, res) => {
         res.status(400)
         return res.json({status:400,error})
     })
+    
 });
 
-
+/*
+uncomment this to use example
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/example/index.html');
+  });
+*/
 app.listen(port, () => console.log(`SynkronyPay app listening on port ${port}!`));

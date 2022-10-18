@@ -86,9 +86,11 @@ take the result and use it as input parameter of PayComponent in browser
  });
 ```
 
+
 ```shell
-node ./src/cli.js -c submitPayment -e dev (or -e prod) -a '{"paymentId": "dataResultFromPayComponent.paymentId","bulkNode": "dataResultFromPayComponent.bulkNode" , "bulkRoot": "dataResultFromPayComponent.bulkRoot"}'
+node ./src/cli.js -c submitPayment -e dev (or -e prod) -a '{"paymentId": "dataResultFromPayComponent.paymentId","base58Bulk": "dataResultFromPayComponent.base58Bulk"}'
 ```
+
 
 
 

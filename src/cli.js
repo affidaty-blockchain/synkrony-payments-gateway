@@ -16,7 +16,7 @@ const SynkronyPayLib = require("./lib/SynkronyPay.lib.js");
 
 
 switch (options.cmd) {
-    case "createIntent" : 
+    case "createIntent" :
         SynkronyPayLib.createIntent(JSON.parse(options.args), config)
         .then(result => console.log({status:200,paymentObject:result}))
         .catch(error => console.log({status:400,error}));

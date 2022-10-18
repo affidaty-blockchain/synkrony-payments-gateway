@@ -8,7 +8,7 @@
     "licenseId" : "YOURLICENSE",
     "webhook":"http://webhook",
     "currency": "EUR",
-    "successUrl":"/pay-component/assets/test/thankyou.html",
+    "successUrl":"/",
     "cancelUrl":"/" ,
     "userPayFees":false, 
     "timeToExpire":86400,

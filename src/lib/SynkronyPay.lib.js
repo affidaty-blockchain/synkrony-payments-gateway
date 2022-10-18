@@ -1,4 +1,3 @@
-const { BulkNodeTransaction, BulkRootTransaction } = require("@affidaty/t2-lib");
 const t2lib = require("@affidaty/t2-lib");
 const fetch = require("node-fetch");
 
@@ -44,21 +43,15 @@ function createIntent({main = {sign: "#BTC", "units": 0 },other= [], payload = {
   })
 }
 
-async function submitPaymentBulkTransaction({bulkNode, bulkRoot}, config) {
+function submitPaymentBulkTransaction({bulkB58}, config) {
   return new Promise(async (resolve, reject) => {
     let baseUrl = process.env.baseUrl
-    const node = new BulkNodeTransaction()
-    const root = new BulkRootTransaction()
     const bulk = new t2lib.BulkTransaction()
     const privateKey = new t2lib.ECDSAKey("private");
-    await node.fromBase58(bulkNode)
-    await root.fromBase58(bulkRoot)
-    bulk.data.root = root
-    bulk.data.nodes.push(node)
+    await bulk.fromBase58(bulkB58)
     await privateKey.importBin(new Uint8Array(t2lib.binConversions.base58ToBuffer(config.account.privateKey)))
     await bulk.sign(privateKey)
     const b58SignedTx = await bulk.toBase58()
-    console.log(b58SignedTx)
     fetch(`${baseUrl}/v1/component/pay/sendPaymentBulk`, { method: 'POST', body: JSON.stringify({bulk: b58SignedTx}),headers: { 
       'Content-Type': 'application/json',
       'synpayauth': `${config.synkronypayAuthorizedDomain};${config.synkronypayAPIKey}`
