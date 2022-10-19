@@ -3,7 +3,7 @@ const optionDefinitions = [
     { name: 'env', alias: 'e' ,type: String},
     { name: 'cmd', alias: 'c', type: String },
     { name: 'args', alias: 'a' ,type: String},
-    
+    { name: 'domain', alias: 'd' ,type: String},
   ]
 const options = commandLineArgs(optionDefinitions)
 require('dotenv').config({ path: `.env.${options.env}` });
@@ -22,6 +22,7 @@ switch (options.cmd) {
         .catch(error => console.log({status:400,error}));
     break;
     case "submitPayment" :
+      config.synkronypayAuthorizedDomain = options.domain || config.synkronypayAuthorizedDomain
       SynkronyPayLib.submitPaymentBulkTransaction(JSON.parse(options.args), config)
       .then(result => console.log({status:200,paymentObject:result}))
       .catch(error => console.log({status:400,error}));

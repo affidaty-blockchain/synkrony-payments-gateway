@@ -37,6 +37,7 @@ app.post('/createIntent', (req, res) => {
 
 app.post('/submitPayment', (req, res) => {
     const args = req.body;
+    config.synkronypayAuthorizedDomain = args.domain || config.synkronypayAuthorizedDomain
     SynkronyPayLib.submitPaymentBulkTransaction(args, config)
     .then(result => res.json({status:200,paymentObject:result}))
     .catch(error => {
@@ -48,8 +49,9 @@ app.post('/submitPayment', (req, res) => {
 
 /*
 uncomment this to use example
-app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/example/index.html');
-  });
 */
+// app.get('/', (req, res) => {
+//   res.sendFile(__dirname + '/example/index.html');
+// });
+
 app.listen(port, () => console.log(`SynkronyPay app listening on port ${port}!`));

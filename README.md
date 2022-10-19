@@ -51,9 +51,7 @@ take the result and use it as input parameter of PayComponent in browser
  ```json 
 
 {
-    "paymentId": "dataResultFromPayComponent.paymentId",
-    "bulkNode": "dataResultFromPayComponent.bulkNode" , 
-    "bulkRoot": "dataResultFromPayComponent.bulkRoot"
+  "base58Bulk": "dataResultFromPayComponent.base58Bulk"
 }
 
 ```
@@ -88,7 +86,7 @@ take the result and use it as input parameter of PayComponent in browser
 
 
 ```shell
-node ./src/cli.js -c submitPayment -e dev (or -e prod) -a '{"paymentId": "dataResultFromPayComponent.paymentId","base58Bulk": "dataResultFromPayComponent.base58Bulk"}'
+node ./src/cli.js -c submitPayment -e dev (or -e prod) -a '{"base58Bulk": "dataResultFromPayComponent.base58Bulk"}'
 ```
 
 

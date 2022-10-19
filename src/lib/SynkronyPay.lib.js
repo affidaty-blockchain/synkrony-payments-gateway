@@ -43,12 +43,12 @@ function createIntent({main = {sign: "#BTC", "units": 0 },other= [], payload = {
   })
 }
 
-function submitPaymentBulkTransaction({bulkB58}, config) {
+function submitPaymentBulkTransaction({base58Bulk}, config) {
   return new Promise(async (resolve, reject) => {
     let baseUrl = process.env.baseUrl
     const bulk = new t2lib.BulkTransaction()
     const privateKey = new t2lib.ECDSAKey("private");
-    await bulk.fromBase58(bulkB58)
+    await bulk.fromBase58(base58Bulk)
     await privateKey.importBin(new Uint8Array(t2lib.binConversions.base58ToBuffer(config.account.privateKey)))
     await bulk.sign(privateKey)
     const b58SignedTx = await bulk.toBase58()
